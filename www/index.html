@@ -3962,9 +3962,9 @@
 				
 				<legend style="margin: 24px 0 12px 0; ">Simulation Options</legend>
 				<ul>
-					<li><div class="input_label">Bankroll</div><span style="position: relative; left: 10px; bottom: 3px; color: #24bb24; font-size: 1.2em;">$</span><input id="bankroll" step="1" type="number" value="300" min="1" style="width: 80px; padding-left: 16px; text-align: center; margin-left: -8px;"  /></li>
+					<li><div class="input_label">Bankroll</div><span style="position: relative; left: 10px; bottom: 3px; color: #24bb24; font-size: 1.2em;">$</span><input id="bankroll" step="25" type="number" value="300" min="1" style="width: 80px; padding-left: 16px; text-align: center; margin-left: -8px;"  /></li>
 					
-				    <li><div class="input_label">Wager/Hand</div><span style="position: relative; left: 10px; bottom: 3px; color: #24bb24; font-size: 1.2em;">$</span><input id="wager" step="1" type="number" value="25" min="1" style="width: 80px; padding-left: 16px; text-align: center; margin-left: -8px;"  /></li>
+				    <li><div class="input_label">Wager/Hand</div><span style="position: relative; left: 10px; bottom: 3px; color: #24bb24; font-size: 1.2em;">$</span><input id="wager" step="25" type="number" value="25" min="1" style="width: 80px; padding-left: 16px; text-align: center; margin-left: -8px;"  /></li>
 				    <li>
 				    	<div class="input_label">Stop</strong></div>
 				    		<select id="stop_rule" name="stop_rule" style="width: 100px;">
@@ -3973,11 +3973,11 @@
 				    			<option value="win_loss">Won/Lost</option>
 				    			<option value="bust">Bust</option>
 				    		</select>		
-				    		<div class="stop_hands" style="display: inline-block;"><input id="stop_hands" name="stop_hands" step="1" type="number" value="100" min="1" max="5000" style="width: 70px;"  /> <span style="font-size: 1rem; ">&nbsp;hands</span></div>
+				    		<div class="stop_hands" style="display: inline-block;"><input id="stop_hands" name="stop_hands" step="100" type="number" value="100" min="1" max="5000" style="width: 70px;"  /> <span style="font-size: 1rem; ">&nbsp;hands</span></div>
 				    		
-				    		<div class="stop_loss" style="display: inline-block;"><span style="position: relative; left: 10px; bottom: 3px; color: red; font-size: 1.2em;">$</span><input id="stop_loss" name="stop_loss" step="1" type="number" value="100" min="1" style="width: 80px; padding-left: 16px; text-align: center; margin-left: -8px;"  /></div>	
+				    		<div class="stop_loss" style="display: inline-block;"><span style="position: relative; left: 10px; bottom: 3px; color: red; font-size: 1.2em;">$</span><input id="stop_loss" name="stop_loss" step="25" type="number" value="100" min="1" style="width: 80px; padding-left: 16px; text-align: center; margin-left: -8px;"  /></div>	
 				    		
-				    		<div class="win_loss" style="display: inline-block;"><span style="font-size: 1rem; color: red;">&nbsp;Lost&nbsp;</span><span style="position: relative; left: 10px; bottom: 3px; color: red; font-size: 1.2em;">$</span><input id="win_loss_lost" name="win_loss_lost" step="1" type="number" value="100" min="1" style="width: 80px; padding-left: 16px; text-align: center; margin-left: -8px;"  /> <span style="font-size: 1rem;">or <span style="color: green;">Won</span>&nbsp;</span> <span style="position: relative; left: 10px; bottom: 3px; color: green; font-size: 1.2em;">$</span><input id="win_loss_won" name="win_loss_won" step="1" type="number" value="100" min="1" style="width: 80px; padding-left: 16px; text-align: center; margin-left: -8px;"  /></div>	
+				    		<div class="win_loss" style="display: inline-block;"><span style="font-size: 1rem; color: red;">&nbsp;Lost&nbsp;</span><span style="position: relative; left: 10px; bottom: 3px; color: red; font-size: 1.2em;">$</span><input id="win_loss_lost" name="win_loss_lost" step="25" type="number" value="100" min="1" style="width: 80px; padding-left: 16px; text-align: center; margin-left: -8px;"  /> <span style="font-size: 1rem;">or <span style="color: green;">Won</span>&nbsp;</span> <span style="position: relative; left: 10px; bottom: 3px; color: green; font-size: 1.2em;">$</span><input id="win_loss_won" name="win_loss_won" step="25" type="number" value="100" min="1" style="width: 80px; padding-left: 16px; text-align: center; margin-left: -8px;"  /></div>	
 				    </li>				
 			</form>
 			
