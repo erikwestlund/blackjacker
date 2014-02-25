@@ -3,6 +3,8 @@
 
 library(shiny)
 
+max_simulations <- 5000
+
 # Card data
 diamonds <- rep('D', 13)
 hearts <- rep('H', 13)
@@ -1191,7 +1193,9 @@ shinyServer(
         html <- c(html, paste(output, sep=''))
         
         
-        if(stop_rule() == 'after'){
+        if(hand_count >= max_simulations){
+          continue <- FALSE
+        } else if(stop_rule() == 'after'){
           ifelse(hand_count >= stop_hands(), continue <- FALSE, continue <- TRUE)
         } else if(stop_rule() == 'lost'){
           ifelse(money_won <= -stop_loss(), continue <- FALSE, continue <- TRUE)
