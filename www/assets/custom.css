@@ -1,0 +1,351 @@
+/* BlackjackR Custom CSS */
+
+body {
+	font-family: 'Open Sans';
+	font-size: 12px;
+	margin: 0;
+	padding: 5px 0 20px 5px;
+}
+
+hr {
+	color: #e5e5e5;
+	margin: 12px 0;
+}
+
+input[type="text"], input[type="number"]{
+	height: 30px;
+}
+
+#wrapper{
+	width: 1280px;
+	margin-left: 10px;
+}
+
+#leftBar{
+	width: 600px;
+	float: left;
+}
+
+#rightPanel {
+	width: 660px;
+	float: right;
+	margin-left: 20px;
+}
+
+#gameSettings{
+	font-family: Lato;
+}
+
+#gameSettings h3{
+	font-size: 1.5em;
+}
+
+#gameSettings ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+#gameSettings ul li {
+	display: inline-block;
+	margin-right: 20px;
+	vertical-align: top;	
+}
+
+#gameSettings label{
+	font-weight: bold;
+}
+
+#gameSettings fieldset label{
+	display: inline;	
+}
+
+#gameSettings input[type="radio"]{
+	margin-right: 6px;
+}
+
+#gameSettings fieldset span{
+	position: relative;
+	top: 3px;
+}
+
+div.input_label {
+	font-size: 1.2em;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+/* Strategy table */
+
+#strategy_legend {
+	margin: 0;
+}
+
+table#strategy {
+	margin-top: 8px;
+}
+
+#strategy td.head{
+	padding: 6px 0;
+	font-size: 1.2em;
+	border-top: 1px solid #e5e5e5;
+}
+
+#strategy td.hand{
+	text-align: right;
+	padding-right: 6px;
+	border-right: 1px solid #e5e5e5;
+}
+
+#strategy td.head_hand{
+	padding: 12px 0 10px;
+}
+
+#strategy td.hand.head_hand{
+	padding-right: 6px;
+}
+
+#strategy tr{
+	border-bottom: 1px solid #e5e5e5;
+}
+
+#strategy td{
+	font-size: 0.8em;
+	width: 50px;
+	text-align: center;
+	padding: 4px;
+}
+
+
+
+#strategy select{
+	width: 45px;
+	padding: 0;
+	margin: 0;
+	font-size: 10px;
+	font-weight: bold;
+}
+
+@-moz-document url-prefix() {
+	#strategy select{
+		font-size: 0.9rem;
+	}
+
+}
+/* Hit */
+
+#strategy_legend span.hit{
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	border: 1px solid #24bb24;
+	background-color: #b0ffb0;
+	padding: 6px;
+	margin-right: 3px;	
+}
+
+#strategy .H {
+	background-color: #79ff79;
+}
+
+/* Stand */
+
+#strategy_legend span.stand{
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	border: 1px solid #bdbd19;
+	background-color: #ffffa4;
+	padding: 6px;
+	margin-right: 3px;
+}
+
+#strategy .S {
+	background-color: #ffff84;
+}
+
+/* Double if allowed, otherwise hit */
+
+#strategy_legend span.doublehit{
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	border: 1px solid #6f2eb3;
+	background-color: #e9d4ff;
+	padding: 6px;
+	margin-right: 3px;	
+}
+
+#strategy .Dh {
+	background-color: #d7b1ff;
+}
+
+/* Double if allowed, otherwise stand */
+
+#strategy_legend span.doublestand{
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	border: 1px solid #283dc1;
+	background-color: #dadfff;
+	padding: 6px;
+	margin-right: 3px;	
+}
+
+#strategy .Ds {
+	background-color: #b0baff;
+}
+
+/* Split */
+
+#strategy_legend span.split{
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	border: 1px solid #e2b810;
+	background-color: #ffeb9c;
+	padding: 6px;
+	margin-right: 3px;	
+}
+
+#strategy .P {
+	background-color: #ffde59;
+}
+
+/* Double and split if allowed, or hit */
+
+#strategy_legend span.doublesplit{
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	border: 1px solid #c8397c;
+	background-color: #ffc1de;
+	padding: 6px;
+	margin-right: 3px;	
+}
+
+#strategy .Pd {
+	background-color: #f7aed0;
+}
+
+/* Surrender if allowed */
+
+#strategy_legend span{
+	line-height: 3em;
+}
+
+#strategy_legend span.surrender{
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	border: 1px solid #cc3d3d;
+	background-color: #ffcbcb;
+	padding: 6px;
+	margin-right: 3px;	
+}
+
+
+#strategy .Rh {
+	background-color: #ffa1a1;
+}
+
+legend {
+		margin-top: 12px;
+	border-top: 1px solid #e5e5e5; 
+}
+
+/* Results */
+
+#results{
+	font-size: 1.25em;
+}
+
+.positive{
+	color: #199219;
+}
+
+/* Scrollable hand report box */
+div.hand_report {
+
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	border: 1px solid #e5e5e5;
+	
+	margin-top: 8px;
+	
+	padding: 5px;
+	overflow-y: scroll;
+	height: 1125px;
+}
+
+table#hand_report td {
+	font-size: 0.9rem;
+}
+
+table#hand_report tr:nth-child(even) { background: #f6f6f6; }
+table#hand_report tr:nth-child(odd) { background: #fff; }
+
+table#hand_report .result{
+	font-weight: bold;
+	width: 130px;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+table#hand_report .player_hand, table#hand_report .dealer_hand{
+	font-weight: bold;
+	width: 130px;
+	border-bottom: 1px solid #e5e5e5;	
+}
+
+table#hand_report .value, table#hand_report .hand_no{
+	font-weight: bold;
+	width: 50px;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+table#hand_report .move, table#hand_report .bets_wonlost, table#hand_report .money, table#hand_report .bankroll {
+	font-weight: bold;
+	width: 50px;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+table#hand_report .H { color: #24bb24; }
+table#hand_report .S { color: #bdbd19; }
+table#hand_report .D { color: #6f2eb3; }
+table#hand_report .P { color: #e2b810; }
+table#hand_report .Pd { color: #c8397c; }
+table#hand_report .Rh { color: #cc3d3d; }
+
+table#hand_report .bank_roll_value_positive{
+	color: green;
+}
+
+table#hand_report .bank_roll_value_negative{
+	color: red;
+}
+
+table#hand_report .bank_roll_value_neutral {
+	color: gray;
+}
+
+div#hand_index_output {
+	margin-top: 8px;
+	font-size: 0.9rem;
+}
+
+div.number_hands{
+	display: inline-block;
+}
+
+div.stop_win{
+	display: inline-block;
+}
+
+.footer {
+	border-top: 1px solid #e5e5e5;
+	font-size: 1.5em;
+	position: relative;
+	top: 12px;
+	padding-left: 20px;
+	padding-top: 12px;
+}

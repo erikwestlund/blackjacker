@@ -1,0 +1,4051 @@
+<html>
+
+<head>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+	
+	<script src="shared/shiny.js" type="text/javascript"></script>
+	<script src="shared/bootstrap/js/bootstrap.min.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="shared/shiny.css"/> 
+	<link rel="stylesheet" type="text/css" href="shared/bootstrap/css/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="shared/shiny.css"/> 
+
+	  <link href="shared/datatables/css/DT_bootstrap.css" rel="stylesheet" type="text/css"/>
+	  <script src="shared/datatables/js/jquery.dataTables.min.js"></script>
+	  <script src="shared/datatables/js/DT_bootstrap.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="assets/custom.css"/> 
+
+
+	<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/themes/smoothness/jquery-ui.css" />
+	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js"></script>
+
+	
+	<link rel="stylesheet" id="fonts-droidsans-css"  href="http://fonts.googleapis.com/css?family=Open+Sans%3Aregular%2Cbold&" type="text/css" media="all" />
+	<link rel="stylesheet" id="fonts-lato-css"  href="http://fonts.googleapis.com/css?family=Lato%3A300%2C400%2C700%2C300italic%2C400italic%2C700italic&" type="text/css" media="all" />
+	
+	<title>BlackJackeR - An R-based Blackjack Simulation App</title>
+	
+</head>
+
+<body>
+
+<h1 style="margin-left: 5px;">BlackjackeR</h1>
+<h2  style="margin-left: 5px; font-size: 1.25rem; font-weight: 100;">An R-Based Blackjack Simulator</h2>
+
+<div id="wrapper">
+	
+	<div id="leftBar">
+		<legend style="margin-bottom: 10px;">Your Strategy</legend>
+		
+		<div id="strategy_legend">
+		<span class="hit">H: Hit</span>
+		<span class="stand">S: Stand</span>
+		<span class="doublehit">Dh: Double if allowed, otherwise hit</span>
+		<span class="doublestand">Ds: Double if allowed, otherwise stand</span><br>
+		<span class="split">P: Split</span>
+		<span class="doublesplit">Pd: Split then double if allowed, otherwise hit</span>
+		<span class="surrender">Rh: Surrender if allowed, otherwise hit</span>		
+		</div>
+		
+		
+		<table id="strategy">
+		<tr>
+			<td class="head"></td>
+			<td colspan="10" style="text-align: center;" class="head"><strong>Dealer Shows</strong></td>
+		</tr>
+		<tr class="head">
+			<td class="head_hand hand"><strong>Hand</strong></td>
+			<td class="head_hand">2</td>
+			<td class="head_hand">3</td>		
+			<td class="head_hand">4</td>		
+			<td class="head_hand">5</td>		
+			<td class="head_hand">6</td>		
+			<td class="head_hand">7</td>		
+			<td class="head_hand">8</td>		
+			<td class="head_hand">9</td>		
+			<td class="head_hand">10</td>		
+			<td class="head_hand">A</td>
+		</tr>
+		<tr>
+			<td class="hand">5</td>
+			<td>
+				<select id="5_2" name="5_2" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="5_3" name="5_3" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="5_4" name="5_4" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="5_5" name="5_5" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="5_6" name="5_6" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="5_7" name="5_7" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="5_8" name="5_8" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="5_9" name="5_9" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="5_10" name="5_10" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="5_A" name="5_10" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>														
+		</tr>
+
+		<tr>
+			<td class="hand">6</td>
+			<td>
+				<select id="6_2" name="6_2" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="6_3" name="6_3" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="6_4" name="6_4" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="6_5" name="6_5" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="6_6" name="6_6" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="6_7" name="6_7" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="6_8" name="6_8" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="6_9" name="6_9" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="6_10" name="6_10" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="6_A" name="6_10" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>														
+		</tr>
+		<tr>
+			<td class="hand">7</td>
+			<td>
+				<select id="7_2" name="7_2" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="7_3" name="7_3" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="7_4" name="7_4" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="7_5" name="7_5" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="7_6" name="7_6" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="7_7" name="7_7" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="7_8" name="7_8" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="7_9" name="7_9" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="7_10" name="7_10" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="7_A" name="7_10" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>														
+		</tr>
+		<!-- 8 -->
+		<tr>
+			<td class="hand">8</td>
+			<td>
+				<select id="8_2" name="8_2" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="8_3" name="8_3" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="8_4" name="8_4" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="8_5" name="8_5" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="8_6" name="8_6" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="8_7" name="8_7" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="8_8" name="8_8" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="8_9" name="8_9" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="8_10" name="8_10" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="8_A" name="8_10" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>														
+		</tr>
+		<!-- 9 -->
+		<tr>
+			<td class="hand">9</td>
+			<td>
+				<select id="9_2" name="9_2" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="9_3" name="9_3" onchange="this.className=this.options[this.selectedIndex].className" class="Dh">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh" selected>Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="9_4" name="9_4" onchange="this.className=this.options[this.selectedIndex].className" class="Dh">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh" selected>Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="9_5" name="9_5" onchange="this.className=this.options[this.selectedIndex].className" class="Dh">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh" selected>Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="9_6" name="9_6" onchange="this.className=this.options[this.selectedIndex].className" class="Dh">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh" selected>Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="9_7" name="9_7" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="9_8" name="9_8" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh" selected>Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="9_9" name="9_9" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="9_10" name="9_10" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="9_A" name="9_10" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>	
+		</tr>	
+		<tr>
+			<td class="hand">10</td>
+			<td>
+				<select id="10_2" name="10_2" onchange="this.className=this.options[this.selectedIndex].className" class="Dh">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh" selected>Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="10_3" name="10_3" onchange="this.className=this.options[this.selectedIndex].className" class="Dh">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh" selected>Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="10_4" name="10_4" onchange="this.className=this.options[this.selectedIndex].className" class="Dh">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh" selected>Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="10_5" name="10_5" onchange="this.className=this.options[this.selectedIndex].className" class="Dh">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh" selected>Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="10_6" name="10_6" onchange="this.className=this.options[this.selectedIndex].className" class="Dh">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh" selected>Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="10_7" name="10_7" onchange="this.className=this.options[this.selectedIndex].className" class="Dh">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh" selected>Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="10_8" name="10_8" onchange="this.className=this.options[this.selectedIndex].className" class="Dh">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh" selected>Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="10_9" name="10_9" onchange="this.className=this.options[this.selectedIndex].className" class="Dh">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh" selected>Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="10_10" name="10_10" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="10_A" name="10_10" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>			
+		</tr>	
+		<tr>
+			<td class="hand">11</td>
+			<td>
+				<select id="11_2" name="11_2" onchange="this.className=this.options[this.selectedIndex].className" class="Dh">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh" selected>Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="11_3" name="11_3" onchange="this.className=this.options[this.selectedIndex].className" class="Dh">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh" selected>Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="11_4" name="11_4" onchange="this.className=this.options[this.selectedIndex].className" class="Dh">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh" selected>Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="11_5" name="11_5" onchange="this.className=this.options[this.selectedIndex].className" class="Dh">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh" selected>Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="11_6" name="11_6" onchange="this.className=this.options[this.selectedIndex].className" class="Dh">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh" selected>Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="11_7" name="11_7" onchange="this.className=this.options[this.selectedIndex].className" class="Dh">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh" selected>Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="11_8" name="11_8" onchange="this.className=this.options[this.selectedIndex].className" class="Dh">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh" selected>Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="11_9" name="11_9" onchange="this.className=this.options[this.selectedIndex].className" class="Dh">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh" selected>Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="11_10" name="11_10" onchange="this.className=this.options[this.selectedIndex].className" class="Dh">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh" selected>Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="11_A" name="11_10" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>			
+		</tr>	
+		<tr>
+			<td class="hand">12</td>
+			<td>
+				<select id="12_2" name="12_2" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="12_3" name="12_3" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="12_4" name="12_4" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="12_5" name="12_5" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="12_6" name="12_6" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="12_7" name="12_7" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="12_8" name="12_8" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="12_9" name="12_9" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="12_10" name="12_10" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="12_A" name="12_10" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>			
+		</tr>	
+		<tr>
+			<td class="hand">13</td>
+			<td>
+				<select id="13_2" name="13_2" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="13_3" name="13_3" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="13_4" name="13_4" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="13_5" name="13_5" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="13_6" name="13_6" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="13_7" name="13_7" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="13_8" name="13_8" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="13_9" name="13_9" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="13_10" name="13_10" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="13_A" name="13_10" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>			
+		</tr>	
+		<tr>
+			<td class="hand">14</td>
+			<td>
+				<select id="14_2" name="14_2" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="14_3" name="14_3" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="14_4" name="14_4" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="14_5" name="14_5" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="14_6" name="14_6" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="14_7" name="14_7" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="14_8" name="14_8" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="14_9" name="14_9" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="14_10" name="14_10" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="14_A" name="14_10" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>			
+		</tr>	
+		<tr>
+			<td class="hand">15</td>
+			<td>
+				<select id="15_2" name="15_2" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="15_3" name="15_3" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="15_4" name="15_4" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="15_5" name="15_5" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="15_6" name="15_6" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="15_7" name="15_7" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="15_8" name="15_8" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="15_9" name="15_9" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="15_10" name="15_10" onchange="this.className=this.options[this.selectedIndex].className" class="Rh">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh" selected>Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="15_A" name="15_10" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+		</tr>	
+		<tr>
+			<td class="hand">16</td>
+			<td>
+				<select id="16_2" name="16_2" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="16_3" name="16_3" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="16_4" name="16_4" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="16_5" name="16_5" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="16_6" name="16_6" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="16_7" name="16_7" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="16_8" name="16_8" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="16_9" name="16_9" onchange="this.className=this.options[this.selectedIndex].className" class="Rh">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh" selected>Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="16_10" name="16_10" onchange="this.className=this.options[this.selectedIndex].className" class="Rh">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh" selected>Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="16_A" name="16_10" onchange="this.className=this.options[this.selectedIndex].className" class="Rh">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh" selected>Rh</option>
+				</select>		
+			</td>			
+		</tr>	
+		<tr>
+			<td class="hand">17</td>
+			<td>
+				<select id="17_2" name="17_2" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="17_3" name="17_3" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="17_4" name="17_4" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="17_5" name="17_5" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="17_6" name="17_6" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="17_7" name="17_7" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="17_8" name="17_8" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="17_9" name="17_9" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="17_10" name="17_10" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="17_A" name="17_10" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>			
+		</tr>	
+		<tr>
+			<td class="hand">18</td>
+			<td>
+				<select id="18_2" name="18_2" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="18_3" name="18_3" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="18_4" name="18_4" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="18_5" name="18_5" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="18_6" name="18_6" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="18_7" name="18_7" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="18_8" name="18_8" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="18_9" name="18_9" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="18_10" name="18_10" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="18_A" name="18_10" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>			
+		</tr>	
+		<tr>
+			<td class="hand">19</td>
+			<td>
+				<select id="19_2" name="19_2" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="19_3" name="19_3" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="19_4" name="19_4" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="19_5" name="19_5" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="19_6" name="19_6" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="19_7" name="19_7" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="19_8" name="19_8" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="19_9" name="19_9" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="19_10" name="19_10" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="19_A" name="19_10" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>			
+		</tr>	
+<tr>
+			<td class="hand">20</td>
+			<td>
+				<select id="20_2" name="20_2" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="20_3" name="20_3" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="20_4" name="20_4" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="20_5" name="20_5" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="20_6" name="20_6" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="20_7" name="20_7" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="20_8" name="20_8" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="20_9" name="20_9" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="20_10" name="20_10" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="20_A" name="20_10" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>			
+		</tr>
+		<tr>
+			<td class="hand">A, 2</td>
+			<td>
+				<select id="A2_2" name="A2_2" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A2_3" name="A2_3" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A2_4" name="A2_4" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A2_5" name="A2_5" onchange="this.className=this.options[this.selectedIndex].className" class="Dh">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh" selected>Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A2_6" name="A2_6" onchange="this.className=this.options[this.selectedIndex].className" class="Dh">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh" selected>Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A2_7" name="A2_7" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A2_8" name="A2_8" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A2_9" name="A2_9" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A2_10" name="A2_10" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A2_A" name="A2_10" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>			
+		</tr>	
+		<tr>
+			<td class="hand">A, 3</td>
+			<td>
+				<select id="A3_2" name="A3_2" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A3_3" name="A3_3" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A3_4" name="A3_4" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A3_5" name="A3_5" onchange="this.className=this.options[this.selectedIndex].className" class="Dh">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh" selected>Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A3_6" name="A3_6" onchange="this.className=this.options[this.selectedIndex].className" class="Dh">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh" selected>Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A3_7" name="A3_7" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A3_8" name="A3_8" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A3_9" name="A3_9" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A3_10" name="A3_10" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A3_A" name="A3_10" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>			
+		</tr>	
+		<tr>
+			<td class="hand">A, 4</td>
+			<td>
+				<select id="A4_2" name="A4_2" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A4_3" name="A4_3" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A4_4" name="A4_4" onchange="this.className=this.options[this.selectedIndex].className" class="Dh">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh" selected>Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A4_5" name="A4_5" onchange="this.className=this.options[this.selectedIndex].className" class="Dh">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh" selected>Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A4_6" name="A4_6" onchange="this.className=this.options[this.selectedIndex].className" class="Dh">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh" selected>Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A4_7" name="A4_7" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A4_8" name="A4_8" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A4_9" name="A4_9" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A4_10" name="A4_10" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A4_A" name="A4_10" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>			
+		</tr>	
+		<tr>
+			<td class="hand">A, 5</td>
+			<td>
+				<select id="A5_2" name="A5_2" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A5_3" name="A5_3" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A5_4" name="A5_4" onchange="this.className=this.options[this.selectedIndex].className" class="Dh">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh" selected>Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A5_5" name="A5_5" onchange="this.className=this.options[this.selectedIndex].className" class="Dh">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh" selected>Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A5_6" name="A5_6" onchange="this.className=this.options[this.selectedIndex].className" class="Dh">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh" selected>Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A5_7" name="A5_7" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A5_8" name="A5_8" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A5_9" name="A5_9" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A5_10" name="A5_10" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A5_A" name="A5_10" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+		</tr>	
+		<tr>
+			<td class="hand">A, 6</td>
+			<td>
+				<select id="A6_2" name="A6_2" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A6_3" name="A6_3" onchange="this.className=this.options[this.selectedIndex].className" class="Dh">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh" selected>Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A6_4" name="A6_4" onchange="this.className=this.options[this.selectedIndex].className" class="Dh">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh" selected>Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A6_5" name="A6_5" onchange="this.className=this.options[this.selectedIndex].className" class="Dh">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh" selected>Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A6_6" name="A6_6" onchange="this.className=this.options[this.selectedIndex].className" class="Dh">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh" selected>Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A6_7" name="A6_7" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A6_8" name="A6_8" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A6_9" name="A6_9" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A6_10" name="A6_10" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A6_A" name="A6_10" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>			
+		</tr>	
+		<tr>
+			<td class="hand">A, 7</td>
+			<td>
+				<select id="A7_2" name="A7_2" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A7_3" name="A7_3" onchange="this.className=this.options[this.selectedIndex].className" class="Dh">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh" selected>Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A7_4" name="A7_4" onchange="this.className=this.options[this.selectedIndex].className" class="Dh">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh" selected>Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A7_5" name="A7_5" onchange="this.className=this.options[this.selectedIndex].className" class="Dh">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh" selected>Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A7_6" name="A7_6" onchange="this.className=this.options[this.selectedIndex].className" class="Dh">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh" selected>Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A7_7" name="A7_7" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A7_8" name="A7_8" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A7_9" name="A7_9" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A7_10" name="A7_10" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A7_A" name="A7_10" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>			
+		</tr>	
+		<tr>
+			<td class="hand">A, 8</td>
+			<td>
+				<select id="A8_2" name="A8_2" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A8_3" name="A8_3" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A8_4" name="A8_4" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A8_5" name="A8_5" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A8_6" name="A8_6" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A8_7" name="A8_7" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A8_8" name="A8_8" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A8_9" name="A8_9" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A8_10" name="A8_10" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A8_A" name="A8_10" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>	
+		</tr>
+		<tr>
+			<td class="hand">A, 9</td>
+			<td>
+				<select id="A9_2" name="A9_2" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A9_3" name="A9_3" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A9_4" name="A9_4" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A9_5" name="A9_5" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A9_6" name="A9_6" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A9_7" name="A9_7" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A9_8" name="A9_8" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A9_9" name="A9_9" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A9_10" name="A9_10" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="A9_A" name="A9_10" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>				
+		</tr>			
+		<tr>
+			<td class="hand">2, 2</td>
+			<td>
+				<select id="22_2" name="22_2" onchange="this.className=this.options[this.selectedIndex].className" class="Pd">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd" selected>Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="22_3" name="22_3" onchange="this.className=this.options[this.selectedIndex].className" class="Pd">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd" selected>Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="22_4" name="22_4" onchange="this.className=this.options[this.selectedIndex].className" class="P">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P" selected>P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="22_5" name="22_5" onchange="this.className=this.options[this.selectedIndex].className" class="P">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P" selected>P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="22_6" name="22_6" onchange="this.className=this.options[this.selectedIndex].className" class="P">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P" selected>P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="22_7" name="22_7" onchange="this.className=this.options[this.selectedIndex].className" class="P">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P" selected>P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="22_8" name="22_8" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H" selected>H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="22_9" name="22_9" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H" selected>H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="22_10" name="22_10" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H" selected>H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="22_A" name="22_10" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H" selected>H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>				
+		</tr>	
+		<tr>
+			<td class="hand">3, 3</td>
+			<td>
+				<select id="33_2" name="33_2" onchange="this.className=this.options[this.selectedIndex].className" class="Pd">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd" selected>Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="33_3" name="33_3" onchange="this.className=this.options[this.selectedIndex].className" class="Pd">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd" selected>Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="33_4" name="33_4" onchange="this.className=this.options[this.selectedIndex].className" class="P">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P" selected>P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="33_5" name="33_5" onchange="this.className=this.options[this.selectedIndex].className" class="P">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P" selected>P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="33_6" name="33_6" onchange="this.className=this.options[this.selectedIndex].className" class="P">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P" selected>P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="33_7" name="33_7" onchange="this.className=this.options[this.selectedIndex].className" class="P">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P" selected>P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="33_8" name="33_8" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H" selected>H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="33_9" name="33_9" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H" selected>H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="33_10" name="33_10" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H" selected>H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="33_A" name="33_10" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H" selected>H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>				
+		</tr>	
+		<tr>
+			<td class="hand">4, 4</td>
+			<td>
+				<select id="44_2" name="44_2" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H" selected>H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="44_3" name="44_3" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H" selected>H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="44_4" name="44_4" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H" selected>H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="44_5" name="44_5" onchange="this.className=this.options[this.selectedIndex].className" class="Pd">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd" selected>Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="44_6" name="44_6" onchange="this.className=this.options[this.selectedIndex].className" class="Pd">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd" selected>Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="44_7" name="44_7" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H" selected>H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="44_8" name="44_8" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H" selected>H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="44_9" name="44_9" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H" selected>H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="44_10" name="44_10" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H" selected>H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="44_A" name="44_10" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H" selected>H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>				
+		</tr>	
+		<tr>
+			<td class="hand">5, 5</td>
+			<td>
+				<select id="55_2" name="55_2" onchange="this.className=this.options[this.selectedIndex].className" class="Pd">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd" selected>Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="55_3" name="55_3" onchange="this.className=this.options[this.selectedIndex].className" class="Pd">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd" selected>Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="55_4" name="55_4" onchange="this.className=this.options[this.selectedIndex].className" class="Pd">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd" selected>Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="55_5" name="55_5" onchange="this.className=this.options[this.selectedIndex].className" class="Pd">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd" selected>Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="55_6" name="55_6" onchange="this.className=this.options[this.selectedIndex].className" class="Pd">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd" selected>Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="55_7" name="55_7" onchange="this.className=this.options[this.selectedIndex].className" class="Pd">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd" selected>Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="55_8" name="55_8" onchange="this.className=this.options[this.selectedIndex].className" class="Pd">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd" selected>Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="55_9" name="55_9" onchange="this.className=this.options[this.selectedIndex].className" class="Pd">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd" selected>Pd</option>
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="55_10" name="55_10" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H" selected>H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="55_A" name="55_10" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H" selected>H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>				
+		</tr>	
+		<tr>
+			<td class="hand">6, 6</td>
+			<td>
+				<select id="66_2" name="66_2" onchange="this.className=this.options[this.selectedIndex].className" class="Pd">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd" selected>Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="66_3" name="66_3" onchange="this.className=this.options[this.selectedIndex].className" class="P">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P" selected>P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="66_4" name="66_4" onchange="this.className=this.options[this.selectedIndex].className" class="P">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P" selected>P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="66_5" name="66_5" onchange="this.className=this.options[this.selectedIndex].className" class="P">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P" selected>P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="66_6" name="66_6" onchange="this.className=this.options[this.selectedIndex].className" class="P">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P" selected>P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="66_7" name="66_7" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H" selected>H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="66_8" name="66_8" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H" selected>H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="66_9" name="66_9" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H" selected>H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="66_10" name="66_10" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H" selected>H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="66_A" name="66_10" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H" selected>H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>				
+		</tr>	
+		<tr>
+			<td class="hand">7, 7</td>
+			<td>
+				<select id="77_2" name="77_2" onchange="this.className=this.options[this.selectedIndex].className" class="Pd">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd" selected>Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="77_3" name="77_3" onchange="this.className=this.options[this.selectedIndex].className" class="P">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P" selected>P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="77_4" name="77_4" onchange="this.className=this.options[this.selectedIndex].className" class="P">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P" selected>P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="77_5" name="77_5" onchange="this.className=this.options[this.selectedIndex].className" class="P">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P" selected>P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="77_6" name="77_6" onchange="this.className=this.options[this.selectedIndex].className" class="P">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P" selected>P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="77_7" name="77_7" onchange="this.className=this.options[this.selectedIndex].className" class="P">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P" selected>P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="77_8" name="77_8" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H" selected>H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="77_9" name="77_9" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H" selected>H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="77_10" name="77_10" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H" selected>H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="77_A" name="77_10" onchange="this.className=this.options[this.selectedIndex].className" class="H">
+				  <option class="H" value="H" selected>H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>				
+		</tr>	
+		<tr>
+			<td class="hand">8, 8</td>
+			<td>
+				<select id="88_2" name="88_2" onchange="this.className=this.options[this.selectedIndex].className" class="P">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P" selected>P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="88_3" name="88_3" onchange="this.className=this.options[this.selectedIndex].className" class="P">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P" selected>P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="88_4" name="88_4" onchange="this.className=this.options[this.selectedIndex].className" class="P">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P" selected>P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="88_5" name="88_5" onchange="this.className=this.options[this.selectedIndex].className" class="P">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P" selected>P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="88_6" name="88_6" onchange="this.className=this.options[this.selectedIndex].className" class="P">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P" selected>P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="88_7" name="88_7" onchange="this.className=this.options[this.selectedIndex].className" class="P">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P" selected>P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="88_8" name="88_8" onchange="this.className=this.options[this.selectedIndex].className" class="P">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P" selected>P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="88_9" name="88_9" onchange="this.className=this.options[this.selectedIndex].className" class="P">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P" selected>P</option>
+				  <option class="Pd" value="Pd">Pd</option>
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="88_10" name="88_10" onchange="this.className=this.options[this.selectedIndex].className" class="P">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P" selected>P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="88_A" name="88_10" onchange="this.className=this.options[this.selectedIndex].className" class="P">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P" selected>P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>				
+		</tr>	
+		<tr>
+			<td class="hand">9, 9</td>
+			<td>
+				<select id="99_2" name="99_2" onchange="this.className=this.options[this.selectedIndex].className" class="P">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P" selected>P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="99_3" name="99_3" onchange="this.className=this.options[this.selectedIndex].className" class="P">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P" selected>P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="99_4" name="99_4" onchange="this.className=this.options[this.selectedIndex].className" class="P">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P" selected>P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="99_5" name="99_5" onchange="this.className=this.options[this.selectedIndex].className" class="P">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P" selected>P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="99_6" name="99_6" onchange="this.className=this.options[this.selectedIndex].className" class="P">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P" selected>P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="99_7" name="99_7" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="99_8" name="99_8" onchange="this.className=this.options[this.selectedIndex].className" class="P">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P" selected>P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="99_9" name="99_9" onchange="this.className=this.options[this.selectedIndex].className" class="P">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P" selected>P</option>
+				  <option class="Pd" value="Pd">Pd</option>
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="99_10" name="99_10" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="99_A" name="99_10" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>	
+		</tr>	
+		<tr>
+			<td class="hand">10, 10</td>
+			<td>
+				<select id="1010_2" name="1010_2" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="1010_3" name="1010_3" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="1010_4" name="1010_4" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="1010_5" name="1010_5" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="1010_6" name="1010_6" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="1010_7" name="1010_7" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="1010_8" name="1010_8" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="1010_9" name="1010_9" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="1010_10" name="1010_10" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="1010_A" name="1010_10" onchange="this.className=this.options[this.selectedIndex].className" class="S">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S" selected>S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P">P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>				
+		</tr>	
+		<tr>
+			<td class="hand">A, A</td>
+			<td>
+				<select id="AA_2" name="AA_2" onchange="this.className=this.options[this.selectedIndex].className" class="P">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P" selected>P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="AA_3" name="AA_3" onchange="this.className=this.options[this.selectedIndex].className" class="P">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P" selected>P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="AA_4" name="AA_4" onchange="this.className=this.options[this.selectedIndex].className" class="P">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P" selected>P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="AA_5" name="AA_5" onchange="this.className=this.options[this.selectedIndex].className" class="P">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P" selected>P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="AA_6" name="AA_6" onchange="this.className=this.options[this.selectedIndex].className" class="P">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P" selected>P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="AA_7" name="AA_7" onchange="this.className=this.options[this.selectedIndex].className" class="P">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P" selected>P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="AA_8" name="AA_8" onchange="this.className=this.options[this.selectedIndex].className" class="P">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P" selected>P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="AA_9" name="AA_9" onchange="this.className=this.options[this.selectedIndex].className" class="P">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P" selected>P</option>
+				  <option class="Pd" value="Pd">Pd</option>
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="AA_10" name="AA_10" onchange="this.className=this.options[this.selectedIndex].className" class="P">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P" selected>P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+			<td>
+				<select id="AA_A" name="AA_10" onchange="this.className=this.options[this.selectedIndex].className" class="P">
+				  <option class="H" value="H">H</option>
+				  <option class="S" value="S">S</option>
+				  <option class="Dh" value="Dh">Dh</option>
+				  <option class="Ds" value="Ds">Ds</option>				  
+				  <option class="P" value="P" selected>P</option>
+				  <option class="Pd" value="Pd">Pd</option>				  
+				  <option class="Rh" value="Rh">Rh</option>
+				</select>		
+			</td>
+		</tr>	
+	
+		</table>
+		
+	</div>
+	<div id="rightPanel">
+		<div id="gameSettings">
+			<form class="main">
+				<legend>House Rules</legend>
+				<ul>
+				    <li><div class="input_label"><br>Decks</div><input id="decks" step="1" type="number" value="6" min="1" max="8" style="width: 50px;" /></li>
+				    <li>
+					    <fieldset>
+					    	<div class="input_label">Dealer Hits<br>Soft 17?</div>
+							<label style="margin-right: 10px;"><input id="soft17" type="radio" name="soft17" value="no" checked><span>No</span></label>
+								<label><input id="soft17" type="radio" name="soft17" value="yes"><span>Yes</span></label>
+						</fieldset>
+					</li>
+					<li>
+					    <fieldset>
+					    	<div class="input_label">Blackjack<br>Pays</div>
+							<input id="blackjack_pays_numerator" name="blackjack_pays_numerator" step="1" type="number" value="3" min="1" style="width: 40px;" /><span style="padding: 0 6px">to</span><input id="blackjack_pays_denominator" name="blackjack_pays_denominator" step="1" type="number" value="2" min="1" style="width: 40px;" />					
+						</fieldset>				
+					</li>
+				    <li>
+					    <fieldset>
+					    	<div class="input_label">Doubling<br>Allowed?</div>
+							<label style="margin-right: 10px;"><input id="doubling_allowed" type="radio" name="doubling_allowed" value="no"><span>No</span></label>
+							<label><input id="doubling_allowed" type="radio" name="doubling_allowed" value="yes" checked><span>Yes</span></label>
+						</fieldset>
+					</li>	
+					
+				    <li>
+					    <fieldset>
+					    	<div class="input_label">Double After<br>Split Allowed?</div>
+							<label style="margin-right: 10px;"><input id="splitdouble_allowed" type="radio" name="splitdouble_allowed" value="no"><span>No</span></label>
+							<label><input id="splitdouble_allowed" type="radio" name="splitdouble_allowed" value="yes" checked><span>Yes</span></label>
+						</fieldset>
+					</li>									
+				    <li>
+					    <fieldset>
+					    	<div class="input_label">Surrender<br>Allowed?</div>
+							<label style="margin-right: 10px;"><input id="surrender_allowed" type="radio" name="surrender_allowed" value="no"><span>No</span></label>
+							<label><input id="surrender_allowed" type="radio" name="surrender_allowed" value="yes" checked><span>Yes</span></label>
+						</fieldset>
+					</li>									
+					
+				</ul>
+				
+				<legend style="margin: 24px 0 12px 0; ">Simulation Options</legend>
+				<ul>
+					<li><div class="input_label">Bankroll</div><span style="position: relative; left: 10px; bottom: 3px; color: #24bb24; font-size: 1.2em;">$</span><input id="bankroll" step="1" type="number" value="300" min="1" style="width: 80px; padding-left: 16px; text-align: center; margin-left: -8px;"  /></li>
+					
+				    <li><div class="input_label">Wager/Hand</div><span style="position: relative; left: 10px; bottom: 3px; color: #24bb24; font-size: 1.2em;">$</span><input id="wager" step="1" type="number" value="25" min="1" style="width: 80px; padding-left: 16px; text-align: center; margin-left: -8px;"  /></li>
+				    <li>
+				    	<div class="input_label">Stop</strong></div>
+				    		<select id="stop_rule" name="stop_rule" style="width: 100px;">
+				    			<option value="after" selected>After</option>
+				    			<option value="lost">Lost</option>
+				    			<option value="win_loss">Won/Lost</option>
+				    			<option value="bust">Bust</option>
+				    		</select>		
+				    		<div class="stop_hands" style="display: inline-block;"><input id="stop_hands" name="stop_hands" step="1" type="number" value="100" min="1" max="5000" style="width: 70px;"  /> <span style="font-size: 1rem; ">&nbsp;hands</span></div>
+				    		
+				    		<div class="stop_loss" style="display: inline-block;"><span style="position: relative; left: 10px; bottom: 3px; color: red; font-size: 1.2em;">$</span><input id="stop_loss" name="stop_loss" step="1" type="number" value="100" min="1" style="width: 80px; padding-left: 16px; text-align: center; margin-left: -8px;"  /></div>	
+				    		
+				    		<div class="win_loss" style="display: inline-block;"><span style="font-size: 1rem; color: red;">&nbsp;Lost&nbsp;</span><span style="position: relative; left: 10px; bottom: 3px; color: red; font-size: 1.2em;">$</span><input id="win_loss_lost" name="win_loss_lost" step="1" type="number" value="100" min="1" style="width: 80px; padding-left: 16px; text-align: center; margin-left: -8px;"  /> <span style="font-size: 1rem;">or <span style="color: green;">Won</span>&nbsp;</span> <span style="position: relative; left: 10px; bottom: 3px; color: green; font-size: 1.2em;">$</span><input id="win_loss_won" name="win_loss_won" step="1" type="number" value="100" min="1" style="width: 80px; padding-left: 16px; text-align: center; margin-left: -8px;"  /></div>	
+				    </li>				
+			</form>
+			
+			<legend style="margin: 24px 0 12px 0; ">Simulation Results</legend>
+			<div id="results">
+				<div id="your_settings" class="shiny-html-output"></div>
+				
+				<div class="hand_report">
+					<div id="hand_report" class="shiny-html-output"></div>
+				</div>
+
+			</div>
+		</div>
+		
+		
+		
+	</div>
+	<div style="clear: both"></div>
+	
+	<legend>Hand Data</legend>
+	<a class="btn shiny-download-link" id="download_hands" href="" target="_blank"><i class="fa fa-download"></i> Download Hand History</a>
+	
+	<div id="hand_index_output">
+		<div id="hand_index" class="shiny-datatable-output"></div>
+	</div>
+
+	
+	
+	<script type="text/javascript">
+		jQuery(document).ready(function() {
+		   jQuery("div.stop_loss").hide();
+		   jQuery("div.win_loss").hide();
+
+		   jQuery("#stop_rule").change(function() {
+		      if(jQuery(this).find("option:selected").val() == "after") {
+		         jQuery("div.stop_loss").hide();
+		         jQuery("div.stop_hands").show();		         
+				 jQuery("div.win_loss").hide();
+		      }
+		      
+		      if(jQuery(this).find("option:selected").val() == "lost") {
+		         jQuery("div.stop_loss").show();
+		         jQuery("div.stop_hands").hide();		         
+				 jQuery("div.win_loss").hide();
+		      }
+
+		      if(jQuery(this).find("option:selected").val() == "bust") {
+		         jQuery("div.stop_loss").hide();
+		         jQuery("div.stop_hands").hide();
+				 jQuery("div.win_loss").hide();		         
+		      }
+		      if(jQuery(this).find("option:selected").val() == "win_loss") {
+		         jQuery("div.stop_loss").hide();
+		         jQuery("div.stop_hands").hide();
+				 jQuery("div.win_loss").show();		         
+		      }
+		      
+		      
+		   });
+		});
+	</script>
+
+</div>
+	<div style="clear: both;">
+	<div class="footer">
+		Built by <a href="http://www.erikwestlund.com">Erik Westlund</a>, 2014.
+	</div>
+	
+</body>
+
+</html>
