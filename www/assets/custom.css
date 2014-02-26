@@ -287,13 +287,13 @@ table#hand_report tr:nth-child(odd) { background: #fff; }
 
 table#hand_report .result{
 	font-weight: bold;
-	width: 130px;
+	width: 110px;
 	border-bottom: 1px solid #e5e5e5;
 }
 
 table#hand_report .player_hand, table#hand_report .dealer_hand{
 	font-weight: bold;
-	width: 130px;
+	width: 140px;
 	border-bottom: 1px solid #e5e5e5;	
 }
 

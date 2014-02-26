@@ -37,7 +37,7 @@ for(p in player_starting_hands){
 ## 1=hand 2=streategy 3=total 4=win 5=loss 6=bets
 hand_index <- matrix(nrow=length(all_hands), ncol=9)
 hand_index[,1] <- all_hands
-colnames(hand_index) <- c('Hand', 'Player Hand', 'Dealer Show Card', 'Strategy', 'Total Hands', 'Wins', 'Losses', 'Bets Won/Lost', 'Win Rate')
+colnames(hand_index) <- c('Hand', 'Player Hand', 'Dealer Show Card', 'Move', 'Total Hands', 'Wins', 'Losses', 'Bets Won/Lost', 'Win Rate')
 
 hand_index[,5] <- 0
 hand_index[,6] <- 0
@@ -1076,7 +1076,7 @@ shinyServer(
           # hand one
           bets_won_one <- hand[[1]][[1]][[9]]
           hand_combination_one <- hand[[1]][[1]][[10]]
-          move_made_one <- hand[[1]][[1]][[11]]          
+          move_made_one <- hand[[1]][[1]][[13]]          
           
           if(bets_won_one > 0){
             bets_won <- bets_won + 1
@@ -1112,7 +1112,7 @@ shinyServer(
           # hand two
           bets_won_two <- hand[[2]][[1]][[9]]
           hand_combination_two <- hand[[2]][[1]][[10]]
-          move_made_two <- hand[[2]][[1]][[11]]          
+          move_made_two <- hand[[2]][[1]][[13]]          
           
           if(bets_won_two > 0){
             bets_won <- bets_won + 1
@@ -1152,7 +1152,7 @@ shinyServer(
         } else {
           bets_won_hand <- hand[[1]][[1]][[9]]
           hand_combination <- hand[[1]][[1]][[10]]
-          move_made <- hand[[1]][[1]][[11]]
+          move_made <- hand[[1]][[1]][[13]]
           
           if(bets_won_hand > 0){
             bets_won <- bets_won + 1
