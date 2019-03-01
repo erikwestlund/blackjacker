@@ -632,7 +632,7 @@ shinyServer(
     win_loss_won <- reactive({ input$win_loss_won })
     
     ########################
-    # RUN SIMULATION
+    # RUN SIMULATIONS
     ########################    
     
     # hit
