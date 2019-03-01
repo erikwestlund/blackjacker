@@ -1,0 +1,9 @@
+version: '3.0'
+services:
+  web:
+    build: ./
+    volumes:
+      - ./app:/srv/shiny-server/
+    restart: always
+    ports:
+      - "8083:3838"
