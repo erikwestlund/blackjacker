@@ -1,4 +1,4 @@
-FROM rocker/shiny
+FROM rocker/shiny:3.4.4
 
 MAINTAINER Erik Westlund
 
